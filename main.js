@@ -65,7 +65,9 @@ const viewSingleDino = (e) => {
   domString += `<p>Type: ${selectedDino.type}</p>`;
   domString += `<p>Age: ${selectedDino.age}</p>`;
   domString += `<p>Owner: ${selectedDino.owner}</p>`;
-  domString += `<p>Health: ${selectedDino.health}</p>`;
+  domString += '<div class="progress">';
+  domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${selectedDino.health}%" aria-valuenow="${selectedDino.health}" aria-valuemin="0" aria-valuemax="100"></div>`;
+  domString += '</div>';
   domString += '</div>';
   domString += '</div>';
   domString += '</div>';
@@ -139,7 +141,9 @@ const printDinos = (dinoArray) => {
     domString += `<img class="card-img-top dino-photo" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
     domString += '<div class="card-body">';
     domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
-    domString += `<p class="card-text">Health: ${dinoArray[i].health}</p>`;
+    domString += '<div class="progress">';
+    domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${dinoArray[i].health}%" aria-valuenow="${dinoArray[i].health}" aria-valuemin="0" aria-valuemax="100"></div>`;
+    domString += '</div>';
     domString += '<button class="btn btn-outline-dark feed-button"><i class="fas fa-drumstick-bite"></i></button>';
     domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>';
     domString += '<button class="btn btn-outline-danger delete-dino"><i class="far fa-trash-alt"></i></button>';
