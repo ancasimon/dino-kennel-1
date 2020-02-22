@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dino Kennel</title>
-
+  <script src="https://kit.fontawesome.com/729d9295e6.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="main.css">
 </head>
@@ -13,10 +13,54 @@
     <a class="navbar-brand" href="#">Dino Kennel</a>
   </nav>
 
+  <div class="col-10 offset-1">
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <i class="fas fa-plus-circle"></i> Add Dino
+            </button>
+          </h2>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <form class="row" id="new-dino-form">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="dino-name">Name</label>
+                  <input type="text" class="form-control" id="dino-name" aria-describedby="nameHelp" placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                  <label for="dino-age">Age</label>
+                  <input type="number" class="form-control" id="dino-age" aria-describedby="ageHelp" placeholder="Enter age">
+                </div>
+                <div class="form-group">
+                  <label for="dino-type">Type</label>
+                  <input type="text" class="form-control" id="dino-type" aria-describedby="typeHelp" placeholder="Enter type">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="dino-owner">Owner</label>
+                  <input type="text" class="form-control" id="dino-owner" aria-describedby="ownerHelp" placeholder="Enter owner">
+                </div>
+                <div class="form-group">
+                  <label for="dino-image">Image</label>
+                  <input type="text" class="form-control" id="dino-image" aria-describedby="imageHelp" placeholder="Enter image URL">
+                </div>
+              </div>
+              <button type="submit" id="submit-new-dino" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script src="./main.js"></script>
 </body>
 </html>
