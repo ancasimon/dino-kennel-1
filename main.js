@@ -1,5 +1,26 @@
 const dinos = [];
 
+const printToDom = (divId, textToPrint) => {
+  const selectedDiv = document.getElementById(divId);
+  selectedDiv.innerHTML = textToPrint;
+};
+
+const printDinos = (dinoArray) => {
+  let domString = '';
+  for (let i =0; i < dinoArray.length; i++){
+    domString += '<div class="col-4">';
+    domString += '<div class="card">';
+    domString += `<img class="card-img-top" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
+    domString += '<div class="card-body">';
+    domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
+    domString += `<p class="card-text">Health: ${dinoArray[i].health}</p>`;
+    domString += '</div>';
+    domString += '</div>';
+    domString += '</div>';
+  }
+  printToDom('kennel', domString);
+};
+
 const newDino = (e) => {
   e.preventDefault();
   const brandNewDino =   {
@@ -15,7 +36,7 @@ const newDino = (e) => {
   dinos.push(brandNewDino);
   document.getElementById('new-dino-form').reset();
   document.getElementById('collapseOne').classList.remove('show');
-  console.log('hi from newDino', dinos);
+  printDinos(dinos);
 };
 
 const init = () => {
