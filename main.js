@@ -1,13 +1,5 @@
 const dinos = [];
 
-// const clearNewDinoForm = () => {
-//   document.getElementById('dino-name').value = '';
-//   document.getElementById('dino-type').value = '';
-//   document.getElementById('dino-age').value = '';
-//   document.getElementById('dino-owner').value = '';
-//   document.getElementById('dino-image').value = '';
-// };
-
 const newDino = (e) => {
   e.preventDefault();
   const brandNewDino =   {
@@ -21,8 +13,8 @@ const newDino = (e) => {
     imageUrl: document.getElementById('dino-image').value
   };
   dinos.push(brandNewDino);
-  // clearNewDinoForm();
   document.getElementById('new-dino-form').reset();
+  document.getElementById('collapseOne').classList.remove('show');
   console.log('hi from newDino', dinos);
 };
 
