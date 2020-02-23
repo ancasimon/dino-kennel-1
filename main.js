@@ -91,7 +91,7 @@ const printToDom = (divId, textToPrint) => {
 
 const closeSingleViewEvent = () => {
   printToDom('single-view', '');
-  buildAllDinos(dinos);
+  $("#singleDinoModal").modal('hide');
 };
 
 const adventureTableBuilder = (advArray) => {
@@ -123,7 +123,6 @@ const viewSingleDino = (e) => {
   const dinoId = e.target.closest('.card').id;
   const selectedDino = dinos.find((x) => dinoId === x.id);
   let domString = '';
-  domString += '<button id="close-single-view" class="btn btn-outline-dark"><i class="far fa-times-circle"></i></button>';
   domString += '<div class="container">';
   domString += '<div class="row">';
   domString += '<div class="col-6">';
@@ -136,11 +135,13 @@ const viewSingleDino = (e) => {
   domString += `<p>Owner: ${selectedDino.owner}</p>`;
   domString += printProgress(selectedDino, selectedDino.health < 1 ? 'graveyard' : 'single-view');
   domString += '</div>';
+  domString += '</div>';
+  domString += '<div class="row">';
   domString += adventureTableBuilder(selectedDino.adventures);
   domString += '</div>';
   domString += '</div>';
 
-  clearAllDinos();
+  $("#singleDinoModal").modal('show');
   printToDom('single-view', domString);
   document.getElementById('close-single-view').addEventListener('click', closeSingleViewEvent);
 };
@@ -225,7 +226,7 @@ const printProgress = (dino, divId) => {
   let domString = '';
   if (divId !== 'graveyard') {
     domString += '<div class="progress">';
-    domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100"></div>`;
+    domString += `<div class="progress-bar progress-bar-striped ${dino.health < 40 ? 'bg-danger' : 'bg-success'}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>`;
     domString += '</div>';
   } else {
     domString += '<div><i class="fas fa-skull-crossbones fa-3x"></i></div>';
@@ -236,20 +237,26 @@ const printProgress = (dino, divId) => {
 
 const printButtons = (divId) => {
   let domString = '';
-  domString += `<button class="btn btn-outline-dark feed-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-drumstick-bite"></i></button>`;
-  domString += `<button class="btn btn-outline-warning adv-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-hiking"></i></button>`;
-  domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>';
-  domString += `<button class="btn btn-outline-danger delete-dino ${divId === 'graveyard' ? 'disabled' : ''}"><i class="far fa-trash-alt"></i></button>`;
+  domString += '<div class="row">';
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-success feed-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-drumstick-bite"></i></button></div>`;
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-warning adv-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-hiking"></i></button></div>`;
+  domString += '</div>';
+  domString += '<div class="row">';
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button></div>`;
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-danger delete-dino ${divId === 'graveyard' ? 'disabled' : ''}"><i class="far fa-trash-alt"></i></button></div>`;
+  domString += '</div>';
+
   return domString;
 }
 
 const printDinos = (dinoArray, divId) => {
-  let domString = '';
+  let domString = `<h2>${divId.charAt(0).toUpperCase() + divId.slice(1)}</h2>`;
+  domString += '<div class="d-flex flex-wrap">';
   for (let i =0; i < dinoArray.length; i++){
-    domString += '<div class="col-4">';
+    domString += '<div class="col-3">';
     domString += `<div id="${dinoArray[i].id}" class="card">`;
     domString += `<img class="card-img-top ${divId !== 'graveyard' ? 'dino-photo' : ''}" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
-    domString += '<div class="card-body">';
+    domString += '<div class="card-body text-center">';
     domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
     domString += printProgress(dinoArray[i], divId);
     domString += printButtons(divId);
@@ -257,6 +264,7 @@ const printDinos = (dinoArray, divId) => {
     domString += '</div>';
     domString += '</div>';
   }
+  domString += '</div>';
   printToDom(divId, domString);
 };
 
@@ -301,12 +309,6 @@ const findLiveHealthyDinos = (dinos) => {
   printDinos(liveDinos, 'kennel');
 }
 
-const clearAllDinos = () => {
-  printToDom('kennel', '');
-  printToDom('hospital', '');
-  printToDom('graveyard', '');
-};
-
 const buildAllDinos = () => {
   findLiveHealthyDinos(dinos);
   findHospitalDinos(dinos);
@@ -320,4 +322,3 @@ const init = () => {
 };
 
 init();
-
