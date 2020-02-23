@@ -228,6 +228,11 @@ const findDeadDinos = (dinos) => {
   deadDinoDomStringBuilder(deadDinos);
 };
 
+const findLiveHealthyDinos = (dinos) => {
+  const liveDinos = dinos.filter((x) => x.health > 39);
+  printDinos(liveDinos);
+}
+
 const clearAllDinos = () => {
   printToDom('kennel', '');
   printToDom('hospital', '');
@@ -235,7 +240,7 @@ const clearAllDinos = () => {
 };
 
 const buildAllDinos = () => {
-  printDinos(dinos);
+  findLiveHealthyDinos(dinos);
   findHospitalDinos(dinos);
   findDeadDinos(dinos);
 };
