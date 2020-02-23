@@ -102,6 +102,30 @@ const closeSingleViewEvent = () => {
 //   }
 // }
 
+const adventureTableBuilder = (advArray) => {
+  let domString = '';
+  domString += '<table class="table">';
+  domString += '<thead class="thead-light">';
+  domString += '<tr>';
+  domString += '<th scope="col">#</th>';
+  domString += '<th scope="col">Date</th>';
+  domString += '<th scope="col">Type</th>';
+  domString += '</tr>';
+  domString += '</thead>';
+  domString += '<tbody>';
+  for(let i = 0; i < advArray.length; i++){
+    domString += '<tr>';
+    domString += `<th scope="row">${i+1}</th>`;
+    domString += `<td>${advArray[i].date}</td>`;
+    domString += `<td>${advArray[i].title}</td>`;
+    domString += '</tr>';
+  }
+  domString += '</tbody>';
+  domString += '</table>';
+
+  return domString;
+}
+
 const viewSingleDino = (e) => {
   const dinoId = e.target.closest('.card').id;
   // const selectedDino = find(dinoId);
@@ -122,6 +146,7 @@ const viewSingleDino = (e) => {
   domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${selectedDino.health}%" aria-valuenow="${selectedDino.health}" aria-valuemin="0" aria-valuemax="100"></div>`;
   domString += '</div>';
   domString += '</div>';
+  domString += adventureTableBuilder(selectedDino.adventures);
   domString += '</div>';
   domString += '</div>';
 
