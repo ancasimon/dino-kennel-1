@@ -116,7 +116,7 @@ const adventureTableBuilder = (advArray) => {
   for(let i = 0; i < advArray.length; i++){
     domString += '<tr>';
     domString += `<th scope="row">${i+1}</th>`;
-    domString += `<td>${advArray[i].date}</td>`;
+    domString += `<td>${moment(advArray[i].date).format('MMMM Do YYYY, h:mm:ss a')}</td>`;
     domString += `<td>${advArray[i].title}</td>`;
     domString += '</tr>';
   }
@@ -270,6 +270,7 @@ const hospitalDomStringBuilder = (dinoArray) => {
     domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${dinoArray[i].health}%" aria-valuenow="${dinoArray[i].health}" aria-valuemin="0" aria-valuemax="100"></div>`;
     domString += '</div>';
     domString += '<button class="btn btn-outline-dark feed-button"><i class="fas fa-drumstick-bite"></i></button>';
+    domString += '<button class="btn btn-outline-warning adv-button"><i class="fas fa-hiking"></i></button>';
     domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>';
     domString += '<button class="btn btn-outline-danger delete-dino"><i class="far fa-trash-alt"></i></button>';
     domString += '</div>';
