@@ -91,7 +91,7 @@ const printToDom = (divId, textToPrint) => {
 
 const closeSingleViewEvent = () => {
   printToDom('single-view', '');
-  buildAllDinos(dinos);
+  $("#singleDinoModal").modal('hide');
 };
 
 const adventureTableBuilder = (advArray) => {
@@ -123,7 +123,6 @@ const viewSingleDino = (e) => {
   const dinoId = e.target.closest('.card').id;
   const selectedDino = dinos.find((x) => dinoId === x.id);
   let domString = '';
-  domString += '<button id="close-single-view" class="btn btn-outline-dark"><i class="far fa-times-circle"></i></button>';
   domString += '<div class="container">';
   domString += '<div class="row">';
   domString += '<div class="col-6">';
@@ -136,11 +135,13 @@ const viewSingleDino = (e) => {
   domString += `<p>Owner: ${selectedDino.owner}</p>`;
   domString += printProgress(selectedDino, selectedDino.health < 1 ? 'graveyard' : 'single-view');
   domString += '</div>';
+  domString += '</div>';
+  domString += '<div class="row">';
   domString += adventureTableBuilder(selectedDino.adventures);
   domString += '</div>';
   domString += '</div>';
 
-  clearAllDinos();
+  $("#singleDinoModal").modal('show');
   printToDom('single-view', domString);
   document.getElementById('close-single-view').addEventListener('click', closeSingleViewEvent);
 };
@@ -308,11 +309,11 @@ const findLiveHealthyDinos = (dinos) => {
   printDinos(liveDinos, 'kennel');
 }
 
-const clearAllDinos = () => {
-  printToDom('kennel', '');
-  printToDom('hospital', '');
-  printToDom('graveyard', '');
-};
+  // const clearAllDinos = () => {
+  //   printToDom('kennel', '');
+  //   printToDom('hospital', '');
+  //   printToDom('graveyard', '');
+  // };
 
 const buildAllDinos = () => {
   findLiveHealthyDinos(dinos);
