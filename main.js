@@ -7,7 +7,7 @@ const dinos = [
     owner: 'Zoe',
     adventures: [],
     health: 99,
-    imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
+    imageUrl: 'https://www.fieldandstream.com/resizer/8xkluKAxQZsEHJKj6qwyU0mLhTo=/760x448/filters:focal(458x270:459x271)/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/TQFN3CD5DAEM4DL2ACD42ZJ5E4.png'
   },
   {
     id: 'dino2',
@@ -17,17 +17,17 @@ const dinos = [
     owner: 'Mary',
     adventures: [],
     health: 1,
-    imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
+    imageUrl: 'https://i.ebayimg.com/images/g/61UAAOSweNpdmtI2/s-l640.png'
   },
   {
     id: 'dino3',
     name: 'Susan',
-    type: 'Stegasaurus',
+    type: 'stegosaurus',
     age: 55,
     owner: 'Luke',
     adventures: [],
     health: 45,
-    imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
+    imageUrl: 'https://cdn.mos.cms.futurecdn.net/owYTb9X5fKpeBhgiaxD73b-320-80.jpg'
   }
 ];
 
@@ -38,7 +38,7 @@ const printToDom = (divId, textToPrint) => {
 
 const closeSingleViewEvent = () => {
   printToDom('single-view', '');
-  printDinos(dinos);
+  buildAllDinos(dinos);
 };
 
 // const find = (dinoId) => {
@@ -72,7 +72,7 @@ const viewSingleDino = (e) => {
   domString += '</div>';
   domString += '</div>';
 
-  printToDom('kennel', '');
+  clearAllDinos();
   printToDom('single-view', domString);
   document.getElementById('close-single-view').addEventListener('click', closeSingleViewEvent);
 };
@@ -89,7 +89,7 @@ const dinoHealth = (e) => {
   const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
   if(dinos[dinoPosition].health < 100) {
     dinos[dinoPosition].health += 1;
-    printDinos(dinos);
+    buildAllDinos(dinos);
   }
 };
 
@@ -104,7 +104,7 @@ const deleteDinoEvent = (e) => {
   const dinoId = e.target.closest('.card').id;
   const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
   dinos.splice(dinoPosition, 1);
-  printDinos(dinos);
+  buildAllDinos(dinos);
 };
 
 const deleteEvents = () => {
@@ -119,10 +119,10 @@ const feedMe = (e) => {
   const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
   if(dinos[dinoPosition].health < 90) {
     dinos[dinoPosition].health += 10;
-    printDinos(dinos);
+    buildAllDinos(dinos);
   } else if (dinos[dinoPosition].health > 89 && dinos[dinoPosition].health < 100) {
     dinos[dinoPosition].health = 100;
-    printDinos(dinos);
+    buildAllDinos(dinos);
   }
 }
 
@@ -158,7 +158,30 @@ const printDinos = (dinoArray) => {
   feedEvents();
 };
 
-
+const hospitalDomStringBuilder = (dinoArray) => {
+  let domString = '';
+  for (let i =0; i < dinoArray.length; i++){
+    domString += '<div class="col-4">';
+    domString += `<div id="${dinoArray[i].id}" class="card">`;
+    domString += `<img class="card-img-top dino-photo" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
+    domString += '<div class="card-body">';
+    domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
+    domString += '<div class="progress">';
+    domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${dinoArray[i].health}%" aria-valuenow="${dinoArray[i].health}" aria-valuemin="0" aria-valuemax="100"></div>`;
+    domString += '</div>';
+    domString += '<button class="btn btn-outline-dark feed-button"><i class="fas fa-drumstick-bite"></i></button>';
+    domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>';
+    domString += '<button class="btn btn-outline-danger delete-dino"><i class="far fa-trash-alt"></i></button>';
+    domString += '</div>';
+    domString += '</div>';
+    domString += '</div>';
+  }
+  printToDom('hospital', domString);
+  singleDinoAddEvents();
+  petEvents();
+  deleteEvents();
+  feedEvents();
+}
 
 const newDino = (e) => {
   e.preventDefault();
@@ -175,12 +198,27 @@ const newDino = (e) => {
   dinos.push(brandNewDino);
   document.getElementById('new-dino-form').reset();
   document.getElementById('collapseOne').classList.remove('show');
+  buildAllDinos();
+};
+
+const findHospitalDinos = (dinos) => {
+  const hospitalDinos = dinos.filter((x) => x.health > 0 && x.health < 40);
+  hospitalDomStringBuilder(hospitalDinos);
+};
+
+const clearAllDinos = () => {
+  printToDom('kennel', '');
+  printToDom('hospital', '');
+};
+
+const buildAllDinos = () => {
   printDinos(dinos);
+  findHospitalDinos(dinos);
 };
 
 const init = () => {
   document.getElementById('submit-new-dino').addEventListener('click', newDino);
-  printDinos(dinos);
+  buildAllDinos();
 };
 
 init();
