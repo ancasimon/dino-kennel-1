@@ -201,7 +201,6 @@ const newDino = (e) => {
   buildAllDinos();
 };
 
-
 const findHospitalDinos = (dinos) => {
   const hospitalDinos = dinos.filter((x) => x.health > 0 && x.health < 40);
   hospitalDomStringBuilder(hospitalDinos);
