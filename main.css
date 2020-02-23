@@ -9,3 +9,7 @@ body {
 #graveyard {
   background-color: #c4c4c4;
 }
+
+.row {
+  margin: 15px 0;
+}

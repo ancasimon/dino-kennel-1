@@ -236,20 +236,25 @@ const printProgress = (dino, divId) => {
 
 const printButtons = (divId) => {
   let domString = '';
-  domString += `<button class="btn btn-outline-dark feed-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-drumstick-bite"></i></button>`;
-  domString += `<button class="btn btn-outline-warning adv-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-hiking"></i></button>`;
-  domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>';
-  domString += `<button class="btn btn-outline-danger delete-dino ${divId === 'graveyard' ? 'disabled' : ''}"><i class="far fa-trash-alt"></i></button>`;
+  domString += '<div class="row">';
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-success feed-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-drumstick-bite"></i></button></div>`;
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-warning adv-button ${divId === 'graveyard' ? 'disabled' : ''}"><i class="fas fa-hiking"></i></button></div>`;
+  domString += '</div>';
+  domString += '<div class="row">';
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button></div>`;
+  domString += `<div class="col-6"><button class="col-12 btn btn-outline-danger delete-dino ${divId === 'graveyard' ? 'disabled' : ''}"><i class="far fa-trash-alt"></i></button></div>`;
+  domString += '</div>';
+
   return domString;
 }
 
 const printDinos = (dinoArray, divId) => {
   let domString = '';
   for (let i =0; i < dinoArray.length; i++){
-    domString += '<div class="col-4">';
+    domString += '<div class="col-3">';
     domString += `<div id="${dinoArray[i].id}" class="card">`;
     domString += `<img class="card-img-top ${divId !== 'graveyard' ? 'dino-photo' : ''}" src="${dinoArray[i].imageUrl}" alt="Card image cap">`;
-    domString += '<div class="card-body">';
+    domString += '<div class="card-body text-center">';
     domString += `<h5 class="card-title">${dinoArray[i].name}</h5>`;
     domString += printProgress(dinoArray[i], divId);
     domString += printButtons(divId);
