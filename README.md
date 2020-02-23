@@ -39,4 +39,4 @@ This project showcases all the vanilla javascript we learned in the foundations 
 * [Adventures](https://github.com/nss-evening-cohort-11/dino-kennel/pull/31/files)
 * [DomString Refactor](https://github.com/nss-evening-cohort-11/dino-kennel/pull/32/files)
 * [Styling Cleanup](https://github.com/nss-evening-cohort-11/dino-kennel/pull/33/files)
-* [README]()
+* [README](https://github.com/nss-evening-cohort-11/dino-kennel/pull/34/files)
