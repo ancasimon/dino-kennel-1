@@ -309,12 +309,6 @@ const findLiveHealthyDinos = (dinos) => {
   printDinos(liveDinos, 'kennel');
 }
 
-  // const clearAllDinos = () => {
-  //   printToDom('kennel', '');
-  //   printToDom('hospital', '');
-  //   printToDom('graveyard', '');
-  // };
-
 const buildAllDinos = () => {
   findLiveHealthyDinos(dinos);
   findHospitalDinos(dinos);
@@ -328,4 +322,3 @@ const init = () => {
 };
 
 init();
-
