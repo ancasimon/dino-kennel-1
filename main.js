@@ -225,7 +225,7 @@ const printProgress = (dino, divId) => {
   let domString = '';
   if (divId !== 'graveyard') {
     domString += '<div class="progress">';
-    domString += `<div class="progress-bar bg-danger" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100"></div>`;
+    domString += `<div class="progress-bar progress-bar-striped ${dino.health < 40 ? 'bg-danger' : 'bg-success'}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>`;
     domString += '</div>';
   } else {
     domString += '<div><i class="fas fa-skull-crossbones fa-3x"></i></div>';
