@@ -249,7 +249,8 @@ const printButtons = (divId) => {
 }
 
 const printDinos = (dinoArray, divId) => {
-  let domString = '';
+  let domString = `<h2>${divId.charAt(0).toUpperCase() + divId.slice(1)}</h2>`;
+  domString += '<div class="d-flex flex-wrap">';
   for (let i =0; i < dinoArray.length; i++){
     domString += '<div class="col-3">';
     domString += `<div id="${dinoArray[i].id}" class="card">`;
@@ -262,6 +263,7 @@ const printDinos = (dinoArray, divId) => {
     domString += '</div>';
     domString += '</div>';
   }
+  domString += '</div>';
   printToDom(divId, domString);
 };
 
